@@ -1,0 +1,101 @@
+.index-layout {
+  display: grid;
+
+
+  grid-template-columns: minmax($pad-24, 1fr) minmax(250px, $small-breakpoint) minmax($pad-24,
+      1fr);
+
+  >* {
+    grid-column: 2;
+
+    &.full {
+      grid-column: 1 /-1;
+    }
+  }
+
+
+  @include for-tablet-layout {
+    grid-template-columns: minmax($pad-20, 1fr) minmax(auto, $medium-breakpoint) minmax($pad-20,
+        1fr);
+  }
+
+  @include for-normal-layout {
+    grid-template-columns: minmax($pad-20, 1fr) minmax(auto, $large-breakpoint) minmax($pad-20,
+        1fr);
+  }
+
+  @include for-wide-layout {
+    grid-template-columns:
+      // minmax($pad-40,1fr) minmax($x-large-breakpoint, 1700px) minmax($pad-40,1fr);
+      80px minmax($x-large-breakpoint, auto) 80px;
+  }
+}
+
+
+.details-layout {
+
+   // Details
+   display: grid;
+   
+   > * {
+    grid-column: 2;
+    
+    &.full {
+      grid-column: 1 /-1;
+    }
+  }
+
+
+
+  @include for-details-sm-layout {
+    // background-color: yellow;
+
+    grid-template-columns:
+      1.5rem minmax(auto, $small-breakpoint-details) 1.5rem;
+  }
+
+  @include for-details-md-layout {
+    // background-color: rgb(0, 255, 68);
+    grid-template-columns:
+      minmax(40px, 1fr) minmax(auto, $medium-breakpoint-details) minmax(40px, 1fr);
+  }
+
+  @include for-details-lg-layout {
+    grid-template-columns:
+      minmax(40px, 1fr) minmax(auto, $large-breakpoint-details) minmax(40px, 1fr);
+  }
+
+  @include for-details-xl-layout {
+
+    grid-template-columns:
+      minmax(80px, 1fr) minmax(auto, $x-large-breakpoint-details) minmax(80px, 1fr);
+
+    >* {
+      grid-column: 2;
+    }
+  }
+}
+
+    // grid-template-columns:
+    //   minmax(0,80px) minmax(auto, $x-large-breakpoint) minmax(0,80px);
+
+  //   grid-template-columns:
+  //     1.5rem minmax(auto, $small-breakpoint-details)
+  //     1.5rem;
+  // }
+  // @include for-details-md-layout {
+  //   // background-color: rgb(0, 255, 68);
+  //   grid-template-columns:
+  //     minmax(40px, 1fr) minmax(auto, $medium-breakpoint-details)
+  //     minmax(40px, 1fr);
+  // }
+
+  // @include for-details-lg-layout {
+  //   // background-color: orange;
+  //   grid-template-columns:
+  //     minmax(40px, 1fr) minmax(auto, $large-breakpoint-details)
+  //     minmax(40px, 1fr);
+  // }
+
+
+  

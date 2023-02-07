@@ -1,0 +1,85 @@
+// Colors
+$pink: #ff5a5f;
+$turquoise: #00a699;
+$orange: #fc642d;
+$dark-grey: rgb(72, 72, 72);
+$grey: rgb(118, 118, 118);
+$text-black: #222222;
+$clr-box-radius: #DDDDDD;
+$white: #ffff;
+$clr-ligthtext: rgb(113, 113, 113);
+$clr-box-radius: #DDDDDD;
+$clr-search-icon-bgc: #dc0e64;
+$clr-hover-on-dates: black;
+$clr-in-range: rgb(242, 239, 239);
+$clr-border-between-div: #EBEBEB;
+
+// Padding
+$pad-8: 8px;
+$pad-5: 5px;
+$pad-15: 15px;
+$pad-12: 12px;
+$pad-20: 20px;
+$pad-24: 24px;
+$pad-40:40px;
+$pad-80:80px;
+
+// Breakpoints
+$small-breakpoint: 605px;
+$medium-breakpoint: 750px;
+$screen-wide-950:950px;
+$large-breakpoint: 1000px;
+$x-large-breakpoint: 1200px;
+
+
+
+$padded-s: $small-breakpoint + 2 * $pad-24;
+$padded-m: $medium-breakpoint + 2 * $pad-20;
+$padded-l: $large-breakpoint + 2 * $pad-20;
+$padded-xl: $x-large-breakpoint + 2 * $pad-40;
+
+
+
+// Breakpoints - Details Page
+$small-breakpoint-details: 687px;
+$medium-breakpoint-details: 688px;
+$large-breakpoint-details: 944px;
+$x-large-breakpoint-details: 1280px;
+
+$padded-s-details: $small-breakpoint-details + 2 * $pad-24;
+$padded-m-details: $medium-breakpoint-details + 2 * $pad-40;
+$padded-l-details: $large-breakpoint-details + 2 * $pad-40;
+$padded-xl-details: $x-large-breakpoint-details + 2 * $pad-80;
+
+
+$dataBoxWidth: 47px;
+$dataBoxPadding: 14px;
+$search-bar-open-max-height:40px;
+
+//search bar hight
+$search-bar-hight: 48px;
+$region-pic-hight: 125px;
+$region-pic-width: 150px;
+
+//
+$regin-img: 122px;
+
+
+// font size
+$header-fonts: 16px;
+$font-size-search-bar: 16px;
+
+
+
+// icon
+$icon-size: 20px;
+
+$guest-margin-between: 25px;
+
+// font weight
+
+$header-search-bar-padding-side: 24px;
+$padding-header-word-nav-bar: 18px;
+
+
+
