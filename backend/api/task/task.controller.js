@@ -1,5 +1,5 @@
 const taskService = require("./task.service.js");
-const externalService = require('../../services/external.service')
+const externalService = require("../../services/external.service");
 
 const logger = require("../../services/logger.service");
 
@@ -8,7 +8,7 @@ async function getTasks(req, res) {
     logger.debug("Getting Tasks");
     const filterBy = {
       where: req.query?.where || "",
-    }
+    };
     const tasks = await taskService.query(filterBy);
     res.json(tasks);
   } catch (err) {
@@ -26,7 +26,7 @@ async function getTaskById(req, res) {
     logger.error("Failed to get task", err);
     res.status(500).send({ err: "Failed to get task" });
   }
-} 
+}
 
 async function addTask(req, res) {
   try {
@@ -51,14 +51,18 @@ async function updateTask(req, res) {
 }
 
 async function performTask(req, res) {
+  const taskId = req.params.id;
   try {
-    const taskId = req.params.id;
-    const status = 'running'
-    const performedTask = await taskService.update(taskId, status);
-    // const executedTask = await externalService.execute(task)
-    // console.log(executedTask);
+    const status = "running";
+    var performedTask = await taskService.update(taskId, status);
+    const executedTask = await externalService.execute(performedTask);
+    console.log(executedTask);
+    if (executedTask) {
+      performedTask = await taskService.update(taskId, "done");
+    }
     res.json(performedTask);
   } catch (err) {
+    performedTask = await taskService.update(taskId, "failed");
     logger.error("Failed to perform task", err);
     res.status(500).send({ err: "Failed to perform task" });
   }
@@ -105,7 +109,6 @@ async function removeTaskMsg(req, res) {
   }
 }
 
-
 module.exports = {
   getTasks,
   getTaskById,
@@ -114,5 +117,5 @@ module.exports = {
   removeTask,
   addTaskMsg,
   removeTaskMsg,
-  performTask
+  performTask,
 };

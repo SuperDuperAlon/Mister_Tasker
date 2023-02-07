@@ -4,7 +4,6 @@ const utilService = require("../../services/util.service");
 const ObjectId = require("mongodb").ObjectId;
 const { log } = require("../../middlewares/logger.middleware");
 const fs = require("fs");
-const external = require("../../services/external.service");
 
 async function query(filterBy) {
   try {
@@ -57,9 +56,7 @@ async function update(taskId, status) {
     const taskToSave = {
       status,
     };
-    console.log(taskToSave);
     const collection = await dbService.getCollection("task");
-    console.log(taskId);
     await collection.updateOne({ _id: new ObjectId(taskId) }, { $set: taskToSave });
 
     return taskId;
