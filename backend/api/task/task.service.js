@@ -4,14 +4,14 @@ const utilService = require("../../services/util.service");
 const ObjectId = require("mongodb").ObjectId;
 const { log } = require("../../middlewares/logger.middleware");
 const fs = require("fs");
+const external = require("../../services/external.service");
 
 async function query(filterBy = { where: "" }) {
   try {
-    const criteria = _buildCriteria(filterBy);
+    // const criteria = _buildCriteria(filterBy);
     const collection = await dbService.getCollection("task");
-    var tasks = await collection.find( criteria ).toArray();
+    var tasks = await collection.find().toArray();
     return tasks.slice(0, 40);
-
   } catch (err) {
     logger.error("cannot find tasks", err);
     throw err;
@@ -51,18 +51,18 @@ async function add(task) {
   }
 }
 
-async function update(task) {
+async function update(taskId, description) {
   try {
     const taskToSave = {
-      name: task.name,
-      price: task.price,
+      description,
     };
+    console.log(taskToSave);
+    console.log(description);
     const collection = await dbService.getCollection("task");
-    await collection.updateOne(
-      { _id: ObjectId(task._id) },
-      { $set: taskToSave }
-    );
-    return task;
+    console.log(taskId);
+    await collection.updateOne({ _id: new ObjectId(taskId) }, { $set: taskToSave });
+
+    return taskId;
   } catch (err) {
     logger.error(`cannot update task ${taskId}`, err);
     throw err;
@@ -73,10 +73,7 @@ async function addTaskMsg(taskId, msg) {
   try {
     msg.id = utilService.makeId();
     const collection = await dbService.getCollection("task");
-    await collection.updateOne(
-      { _id: ObjectId(taskId) },
-      { $push: { msgs: msg } }
-    );
+    await collection.updateOne({ _id: { taskId } }, { $push: { msgs: msg } });
     return msg;
   } catch (err) {
     logger.error(`cannot add task msg ${taskId}`, err);
@@ -98,26 +95,26 @@ async function removeTaskMsg(taskId, msgId) {
   }
 }
 
-function _buildCriteria(filterBy) {
-  let criteria = {};
-  const txtCriteria = { $regex: new RegExp(filterBy.where, "ig") };
-  // criteria = {
-  //   "loc.country": txtCriteria,
-  // }
-  criteria.$or = [
-    {
-      "loc.country": txtCriteria,
-    },
-    {
-      "loc.city": txtCriteria,
-    },
-    {
-      "loc.address": txtCriteria,
-    }
-  ]
+// function _buildCriteria(filterBy) {
+//   let criteria = {};
+//   const txtCriteria = { $regex: new RegExp(filterBy.where, "ig") };
+//   // criteria = {
+//   //   "loc.country": txtCriteria,
+//   // }
+//   criteria.$or = [
+//     {
+//       "loc.country": txtCriteria,
+//     },
+//     {
+//       "loc.city": txtCriteria,
+//     },
+//     {
+//       "loc.address": txtCriteria,
+//     }
+//   ]
 
-  return criteria;
-}
+//   return criteria;
+// }
 
 module.exports = {
   remove,
@@ -127,4 +124,4 @@ module.exports = {
   update,
   addTaskMsg,
   removeTaskMsg,
-}
+};

@@ -1,4 +1,5 @@
 const taskService = require("./task.service.js");
+const externalService = require('../../services/external.service')
 
 const logger = require("../../services/logger.service");
 
@@ -52,6 +53,20 @@ async function updateTask(req, res) {
   }
 }
 
+async function performTask(req, res) {
+  try {
+    const taskId = req.params.id;
+    const description = 'running'
+    const performedTask = await taskService.update(taskId, description);
+    // const executedTask = await externalService.execute(task)
+    // console.log(executedTask);
+    res.json(performedTask);
+  } catch (err) {
+    logger.error("Failed to perform task", err);
+    res.status(500).send({ err: "Failed to perform task" });
+  }
+}
+
 async function removeTask(req, res) {
   try {
     const taskId = req.params.id;
@@ -93,6 +108,7 @@ async function removeTaskMsg(req, res) {
   }
 }
 
+
 module.exports = {
   getTasks,
   getTaskById,
@@ -101,4 +117,5 @@ module.exports = {
   removeTask,
   addTaskMsg,
   removeTaskMsg,
+  performTask
 };
