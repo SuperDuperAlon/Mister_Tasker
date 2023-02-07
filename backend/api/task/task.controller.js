@@ -29,11 +29,8 @@ async function getTaskById(req, res) {
 } 
 
 async function addTask(req, res) {
-  const { loggedinUser } = req;
-
   try {
     const task = req.body;
-    task.owner = loggedinUser;
     const addedTask = await taskService.add(task);
     res.json(addedTask);
   } catch (err) {
@@ -56,8 +53,8 @@ async function updateTask(req, res) {
 async function performTask(req, res) {
   try {
     const taskId = req.params.id;
-    const description = 'running'
-    const performedTask = await taskService.update(taskId, description);
+    const status = 'running'
+    const performedTask = await taskService.update(taskId, status);
     // const executedTask = await externalService.execute(task)
     // console.log(executedTask);
     res.json(performedTask);

@@ -6,12 +6,12 @@ const { log } = require("../../middlewares/logger.middleware");
 const fs = require("fs");
 const external = require("../../services/external.service");
 
-async function query(filterBy = { where: "" }) {
+async function query(filterBy) {
   try {
     // const criteria = _buildCriteria(filterBy);
     const collection = await dbService.getCollection("task");
     var tasks = await collection.find().toArray();
-    return tasks.slice(0, 40);
+    return tasks
   } catch (err) {
     logger.error("cannot find tasks", err);
     throw err;
@@ -21,7 +21,8 @@ async function query(filterBy = { where: "" }) {
 async function getById(taskId) {
   try {
     const collection = await dbService.getCollection("task");
-    const task = collection.findOne({ _id: taskId });
+    console.log(taskId);
+    const task = collection.findOne({ _id: new ObjectId(taskId) });
     return task;
   } catch (err) {
     logger.error(`while finding task ${taskId}`, err);
@@ -31,8 +32,8 @@ async function getById(taskId) {
 
 async function remove(taskId) {
   try {
-    const collection = await dbService.getCollection("tasks");
-    await collection.deleteOne({ _id: taskId });
+    const collection = await dbService.getCollection("task");
+    await collection.deleteOne({ _id: new ObjectId(taskId) });
     return taskId;
   } catch (err) {
     logger.error(`cannot remove task ${taskId}`, err);
@@ -51,13 +52,12 @@ async function add(task) {
   }
 }
 
-async function update(taskId, description) {
+async function update(taskId, status) {
   try {
     const taskToSave = {
-      description,
+      status,
     };
     console.log(taskToSave);
-    console.log(description);
     const collection = await dbService.getCollection("task");
     console.log(taskId);
     await collection.updateOne({ _id: new ObjectId(taskId) }, { $set: taskToSave });
