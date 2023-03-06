@@ -13,15 +13,15 @@ export const taskService = {
   save,
   remove,
   addTaskMsg,
-  getListings
+  // getListings
 }
 window.cs = taskService;
 
-async function getListings(hostId) {
-  const queryParams = `?hostId=${hostId}`;
-  const tasks = await httpService.get(BASE_URL + queryParams);
-  return tasks
-}
+// async function getListings(taskId) {
+//   const queryParams = `?taskId=${taskId}`;
+//   const tasks = await httpService.get(BASE_URL + queryParams);
+//   return tasks
+// }
 
 async function query(filterBy) {
   const queryParams = `?`;

@@ -1,23 +1,26 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
-import { useState } from "react";
 import { taskService } from "../services/task.service.js";
 
 export function TaskIndex() {
+  const [tasks, setTasks] = useState(null);
+
   useEffect(() => {
-    loadTasks();
+    loadTasks(null);
   }, []);
 
   async function loadTasks(filter) {
     try {
       const tasks = await taskService.query(filter);
+      setTasks(tasks);
     } catch (err) {
       console.log("Cannot load tasks", err);
       throw err;
     }
   }
+
 
   // async function onRemoveTask(ev, taskId) {
   //     ev.stopPropagation()
@@ -33,12 +36,13 @@ export function TaskIndex() {
   //     ev.stopPropagation()
 
   // }
+  if (!tasks) return <div>loading </div>;
+  else
+    return (
+      <div className="index-layout">
+        {/* <TaskList/>  */}
 
-  return (
-    <div className="index-layout">
-      {/* <TaskList/>  */}
-
-      <div>a new page</div>
-    </div>
-  );
+        <div>a new page</div>
+      </div>
+    );
 }
