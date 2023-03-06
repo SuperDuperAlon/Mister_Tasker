@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
 import { taskService } from "../services/task.service.js";
 
+import { TaskList } from "../cmps/task-list.jsx";
+
 export function TaskIndex() {
   const [tasks, setTasks] = useState(null);
 
@@ -40,9 +42,10 @@ export function TaskIndex() {
   else
     return (
       <div className="index-layout">
-        {/* <TaskList/>  */}
+                <div>This is the index page</div>
+        <TaskList tasks={tasks}/> 
 
-        <div>a new page</div>
+
       </div>
     );
 }
