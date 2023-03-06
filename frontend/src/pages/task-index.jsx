@@ -5,6 +5,7 @@ import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
 import { taskService } from "../services/task.service.js";
 
 import { TaskList } from "../cmps/task-list.jsx";
+import { TaskFilter } from "../cmps/task-filter.jsx";
 
 export function TaskIndex() {
   const [tasks, setTasks] = useState(null);
@@ -23,20 +24,6 @@ export function TaskIndex() {
     }
   }
 
-  // async function onRemoveTask(ev, taskId) {
-  //     ev.stopPropagation()
-  //     try {
-  //         await removeTask(taskId)
-  //         showSuccessMsg('Task removed')
-  //     } catch (err) {
-  //         showErrorMsg('Cannot remove task')
-  //     }
-  // }
-
-  // async function onEditTask(ev, task) {
-  //     ev.stopPropagation()
-
-  // }
   if (!tasks) return <div>loading </div>;
   else
     return (
@@ -48,7 +35,7 @@ export function TaskIndex() {
             <button>Create New Tasks</button>
             <button>Stop Task Worker</button>
           </div>
-          <div>Filters:</div>
+          <TaskFilter />
         </nav>
         <TaskList tasks={tasks} />
       </div>

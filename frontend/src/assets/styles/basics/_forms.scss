@@ -6,11 +6,15 @@
 //     margin: 5px;
 //     cursor: pointer;
 // }
-
+form {
+    display: flex;
+}
 form > * {
-    display: block;
-    width: 200px;
-    margin: 10px 0px;
+    display: flex;
+}
+
+input {
+    display: flex;
 }
 
 .btn-link {
