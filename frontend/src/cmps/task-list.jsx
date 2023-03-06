@@ -1,5 +1,4 @@
 export function TaskList({ tasks }) {
-  
   return (
     <section>
       <table>
@@ -20,6 +19,23 @@ export function TaskList({ tasks }) {
               <td>Actions</td>
             </tr>
           ))}
+          <tr>
+            <td>
+              Task Title:
+              <input type="text" name="title" />
+            </td>
+            <td colSpan={3}>
+              Importance:
+              <select>
+                <option value="one">1</option>
+                <option value="two">2</option>
+                <option value="three">3</option>
+              </select>
+            </td>
+            <td>
+              <button>save</button>
+            </td>
+          </tr>
         </tbody>
       </table>
     </section>
