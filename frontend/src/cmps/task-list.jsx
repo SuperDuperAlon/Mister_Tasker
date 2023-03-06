@@ -1,21 +1,23 @@
-
-
-
-export function TaskList({
-  tasks,
-  onRemoveStay,
-  onEditStay,
-  onClickOutSideTheBar,
-  openSearchBar,
-  // onOpenStay,
-}) {
+export function TaskList({ tasks }) {
+  
   return (
     <section>
-      <ul className="task-list">
-        {tasks.map((task) => 
-          <li key={task._id}>{task.title}</li>
-        )}
-      </ul>
+      <table>
+        <thead>
+          <th>Title</th>
+          <th>Importance</th>
+          <th>Status</th>
+        </thead>
+        <tbody>
+          {tasks.map((task) => (
+            <tr key={task._id}>
+              <td>{task.title}</td>
+              <td>{task.importance}</td>
+              <td>{task.status}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </section>
-  )
+  );
 }

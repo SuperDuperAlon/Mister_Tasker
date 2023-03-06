@@ -23,7 +23,6 @@ export function TaskIndex() {
     }
   }
 
-
   // async function onRemoveTask(ev, taskId) {
   //     ev.stopPropagation()
   //     try {
@@ -42,10 +41,16 @@ export function TaskIndex() {
   else
     return (
       <div className="index-layout">
-                <div>This is the index page</div>
-        <TaskList tasks={tasks}/> 
-
-
+        <nav>
+          <div>
+            <button>Generate Tasks</button>
+            <button>Clear Tasks</button>
+            <button>Create New Tasks</button>
+            <button>Stop Task Worker</button>
+          </div>
+          <div>Filters:</div>
+        </nav>
+        <TaskList tasks={tasks} />
       </div>
     );
 }
